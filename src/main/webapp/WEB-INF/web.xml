@@ -1,14 +1,9 @@
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-         version="6.0">
+<servlet>
+<servlet-name>hello</servlet-name>
+<servlet-class>com.demo.HelloServlet</servlet-class>
+</servlet>
 
-    <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.example.HelloServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
-
-</web-app>
+<servlet-mapping>
+<servlet-name>hello</servlet-name>
+<url-pattern>/hello</url-pattern>
+</servlet-mapping>
