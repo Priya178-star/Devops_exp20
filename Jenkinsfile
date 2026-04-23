@@ -1,48 +1,19 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'mymaven'
-        jdk 'myjdk'
-    }
-
-    environment {
-        IMAGE_NAME = "sample-webapp"
-        CONTAINER_NAME = "sample-webapp-container"
-    }
-
     stages {
 
-        stage('Clone') {
-            steps {
-                echo 'Cloning repository'
-            }
-        }
-
-        stage('Build WAR') {
+        stage('Build') {
             steps {
                 bat 'mvn clean package'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Docker') {
             steps {
-                bat 'docker build -t %IMAGE_NAME% .'
+                bat 'docker build -t webapp .'
+                bat 'docker run -d -p 8087:8080 webapp'
             }
         }
-
-        stage('Stop Old Container') {
-            steps {
-                bat 'docker stop %CONTAINER_NAME% || exit 0'
-                bat 'docker rm %CONTAINER_NAME% || exit 0'
-            }
-        }
-
-        stage('Run Container') {
-            steps {
-                bat 'docker run -d -p 8085:8080 --name %CONTAINER_NAME% %IMAGE_NAME%'
-            }
-        }
-
     }
 }
