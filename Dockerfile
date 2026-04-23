@@ -1,3 +1,2 @@
-FROM tomcat:11.0-jdk17
-COPY target/sample-webapp.war /usr/local/tomcat/webapps/
-EXPOSE 8080
+FROM tomcat:9
+COPY target/webapp.war /usr/local/tomcat/webapps/
